@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Result Calculator</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input { margin: 5px; padding: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Student Result Calculator</h2>
+
+  <input type="text" id="name" placeholder="Enter Name"><br>
+  <input type="number" id="m1" placeholder="Marks in Math"><br>
+  <input type="number" id="m2" placeholder="Marks in Science"><br>
+  <input type="number" id="m3" placeholder="Marks in English"><br>
+  
+  <button onclick="calculate()">Calculate Result</button>
+
+  <h3 id="result"></h3>
+
+  <p style="margin-top:40px; color:gray;">Created by Md Wali Ahmed</p>
+
+  <script>
+    function calculate() {
+      var name = document.getElementById("name").value;
+      var m1 = parseInt(document.getElementById("m1").value);
+      var m2 = parseInt(document.getElementById("m2").value);
+      var m3 = parseInt(document.getElementById("m3").value);
+      var total = m1 + m2 + m3;
+      var avg = total / 3;
+      var grade = "";
+
+      if (avg >= 90) grade = "A+";
+      else if (avg >= 75) grade = "A";
+      else if (avg >= 60) grade = "B";
+      else if (avg >= 40) grade = "C";
+      else grade = "Fail";
+
+      document.getElementById("result").innerHTML = 
+        name + "'s Total: " + total + "<br>Average: " + avg.toFixed(2) + "<br>Grade: " + grade;
+    }
+  </script>
+</body>
+</html>

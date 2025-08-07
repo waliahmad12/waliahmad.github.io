@@ -1,45 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Student Result Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥 Result Calculator</title>
   <style>
-    body { font-family: Arial; padding: 20px; }
-    input { margin: 5px; padding: 5px; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      width: 95%;
+      max-width: 450px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    input {
+      background-color: #f7f7f7;
+    }
+
+    button {
+      background: linear-gradient(to right, #ee0979, #ff6a00);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #output {
+      margin-top: 20px;
+      background-color: #e1f7d5;
+      padding: 20px;
+      border-radius: 10px;
+      color: #222;
+      font-size: 16px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    .footer {
+      margin-top: 40px;
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .footer span {
+      font-weight: bold;
+      background-color: #fff;
+      color: #ff6a00;
+      padding: 4px 10px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h2>Student Result Calculator</h2>
 
-  <input type="text" id="name" placeholder="Enter Name"><br>
-  <input type="number" id="m1" placeholder="Marks in Math"><br>
-  <input type="number" id="m2" placeholder="Marks in Science"><br>
-  <input type="number" id="m3" placeholder="Marks in English"><br>
-  
-  <button onclick="calculate()">Calculate Result</button>
+  <h2>🔥 Student Result Calculator</h2>
 
-  <h3 id="result"></h3>
+  <div class="container">
+    <input type="text" id="name" placeholder="Enter Student Name" />
 
-  <p style="margin-top:40px; color:gray;">Created by Md Wali Ahmed</p>
+    <!-- 10 Subjects -->
+    <input type="number" class="marks" placeholder="Subject 1 Marks" />
+    <input type="number" class="marks" placeholder="Subject 2 Marks" />
+    <input type="number" class="marks" placeholder="Subject 3 Marks" />
+    <input type="number" class="marks" placeholder="Subject 4 Marks" />
+    <input type="number" class="marks" placeholder="Subject 5 Marks" />
+    <input type="number" class="marks" placeholder="Subject 6 Marks" />
+    <input type="number" class="marks" placeholder="Subject 7 Marks" />
+    <input type="number" class="marks" placeholder="Subject 8 Marks" />
+    <input type="number" class="marks" placeholder="Subject 9 Marks" />
+    <input type="number" class="marks" placeholder="Subject 10 Marks" />
+
+    <button onclick="calculate()">🔍 Calculate Result</button>
+    <div id="output"></div>
+  </div>
+
+  <div class="footer">
+    🔧 Made with ❤️ by <span>Md Wali Ahmad</span>
+  </div>
 
   <script>
     function calculate() {
-      var name = document.getElementById("name").value;
-      var m1 = parseInt(document.getElementById("m1").value);
-      var m2 = parseInt(document.getElementById("m2").value);
-      var m3 = parseInt(document.getElementById("m3").value);
-      var total = m1 + m2 + m3;
-      var avg = total / 3;
-      var grade = "";
+      const name = document.getElementById("name").value;
+      const inputs = document.querySelectorAll(".marks");
 
-      if (avg >= 90) grade = "A+";
-      else if (avg >= 75) grade = "A";
-      else if (avg >= 60) grade = "B";
-      else if (avg >= 40) grade = "C";
-      else grade = "Fail";
+      let marks = [];
+      inputs.forEach(input => {
+        if (input.value.trim() !== "") {
+          marks.push(parseInt(input.value));
+        }
+      });
 
-      document.getElementById("result").innerHTML = 
-        name + "'s Total: " + total + "<br>Average: " + avg.toFixed(2) + "<br>Grade: " + grade;
+      if (!name || marks.length === 0) {
+        alert("Please enter student name and at least one subject marks.");
+        return;
+      }
+
+      let total = marks.reduce((a, b) => a + b, 0);
+      let percent = total / marks.length;
+      let grade = "";
+      let result = marks.every(m => m >= 35) ? "Pass" : "Fail";
+
+      if (percent >= 90) grade = "A+";
+      else if (percent >= 80) grade = "A";
+      else if (percent >= 70) grade = "B";
+      else if (percent >= 60) grade = "C";
+      else if (percent >= 50) grade = "D";
+      else grade = "F";
+
+      document.getElementById("output").innerHTML = `
+        <b>Name:</b> ${name}<br>
+        <b>Total Marks:</b> ${total} / ${marks.length * 100}<br>
+        <b>Percentage:</b> ${percent.toFixed(2)}%<br>
+        <b>Grade:</b> ${grade}<br>
+        <b>Result:</b> ${result}
+      `;
     }
   </script>
+
 </body>
 </html>

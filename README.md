@@ -1,4 +1,19 @@
-# waliahmad.github.io
-A personal website for soulful thoughts and poetry by Md Wali Ahmed, inspired by Instagram page @lafz.e.rooh.3
-this is my page @lafz.e.rooh.3
-visit: https://www.instagram.com/lafz.e.rooh.3?igsh=MTRrNGlrcTBieDN6cg==
+# Student Result Calculator
+
+A simple web application to calculate student result based on marks input.
+
+Created by **Md Wali Ahmad** using HTML, CSS, and JavaScript.
+
+🚀 Live Website: [Click here](https://waliahmad12.github.io)
+
+## Features
+
+- Enter marks for different subjects  
+- Calculates total marks and percentage  
+- Displays result status (Pass/Fail)
+
+## Technologies Used
+
+- HTML  
+- CSS  
+- JavaScript

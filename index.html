@@ -1,1 +1,122 @@
-978e177567f3c3428df5108a94a154e0ab011f41
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Result Calculator</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  text-align: center;
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+h2 { margin-bottom: 15px; }
+
+input {
+  width: 80%;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #4facfe;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover { background: #00c6ff; }
+
+.result {
+  margin-top: 15px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>🔥 Student Result Calculator</h2>
+
+  <!-- Subject Inputs -->
+  <input type="number" placeholder="Subject 1" class="marks"><br>
+  <input type="number" placeholder="Subject 2" class="marks"><br>
+  <input type="number" placeholder="Subject 3" class="marks"><br>
+  <input type="number" placeholder="Subject 4" class="marks"><br>
+  <input type="number" placeholder="Subject 5" class="marks"><br>
+  <input type="number" placeholder="Subject 6" class="marks"><br>
+  <input type="number" placeholder="Subject 7" class="marks"><br>
+  <input type="number" placeholder="Subject 8" class="marks"><br>
+  <input type="number" placeholder="Subject 9" class="marks"><br>
+  <input type="number" placeholder="Subject 10" class="marks"><br>
+
+  <button onclick="calculate()">Calculate Result</button>
+
+  <div class="result" id="output"></div>
+</div>
+
+<script>
+function calculate() {
+  let inputs = document.querySelectorAll(".marks");
+  let total = 0;
+  let count = 0;
+  let fail = false;
+
+  inputs.forEach(input => {
+    let mark = parseFloat(input.value);
+
+    if (!isNaN(mark)) {
+      total += mark;
+      count++;
+
+      if (mark < 33) {
+        fail = true;
+      }
+    }
+  });
+
+  if (count === 0) {
+    document.getElementById("output").innerHTML = "Marks dalo pehle!";
+    return;
+  }
+
+  let percentage = (total / (count * 100)) * 100;
+  let grade = "";
+
+  if (percentage >= 90) grade = "A+";
+  else if (percentage >= 75) grade = "A";
+  else if (percentage >= 60) grade = "B";
+  else if (percentage >= 50) grade = "C";
+  else if (percentage >= 33) grade = "D";
+  else grade = "F";
+
+  let result = fail ? "FAIL ❌" : "PASS ✅";
+
+  document.getElementById("output").innerHTML =
+    `Total: ${total}<br>
+     Percentage: ${percentage.toFixed(2)}%<br>
+     Grade: ${grade}<br>
+     Result: ${result}`;
+}
+</script>
+
+</body>
+</html>
